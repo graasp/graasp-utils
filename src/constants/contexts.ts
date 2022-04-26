@@ -1,6 +1,6 @@
 export enum Context {
-  BUILDER = 'Builder',
-  EXPLORER = 'Explorer',
-  PLAYER = 'Player',
-  ANALYZER = 'Analyzer',
+  BUILDER = 'builder',
+  EXPLORER = 'explorer',
+  PLAYER = 'player',
+  ANALYZER = 'analyzer',
 }
