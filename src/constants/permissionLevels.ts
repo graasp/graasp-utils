@@ -1,9 +1,9 @@
-export const PermissionLevel = {
+export const PermissionLevelValues = {
   Read: 'read',
   Write: 'write',
   Admin: 'admin',
 };
-Object.freeze(PermissionLevel);
+export const PermissionLevel = Object.freeze(PermissionLevelValues);
 type PermissionLevel = typeof PermissionLevel[keyof typeof PermissionLevel];
 
 export class PermissionLevelCompare {
