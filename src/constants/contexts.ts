@@ -1,4 +1,4 @@
-export const enum Context {
+export enum Context {
   BUILDER = 'builder',
   EXPLORER = 'explorer',
   PLAYER = 'player',
