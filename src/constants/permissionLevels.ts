@@ -1,8 +1,10 @@
-export const enum PermissionLevel {
-  Read = 'read',
-  Write = 'write',
-  Admin = 'admin',
-}
+export const PermissionLevel = {
+  Read: 'read',
+  Write: 'write',
+  Admin: 'admin',
+};
+Object.freeze(PermissionLevel);
+type PermissionLevel = typeof PermissionLevel[keyof typeof PermissionLevel];
 
 export class PermissionLevelCompare {
   /**
