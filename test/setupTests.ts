@@ -27,3 +27,13 @@ Object.defineProperty(window, 'location', {
 
 global.document = window.document;
 global.window = global.document.defaultView as Window & typeof globalThis;
+
+const localStorageMock = {
+    getItem: jest.fn(),
+    setItem: jest.fn(),
+    clear: jest.fn(),
+    key: jest.fn(),
+    removeItem: jest.fn(),
+    length: 5,
+};
+global.localStorage = localStorageMock;
