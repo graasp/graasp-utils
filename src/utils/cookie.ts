@@ -8,10 +8,14 @@ export const COOKIE_KEYS = {
 export const hasAcceptedCookies = () =>
   Cookies.get(COOKIE_KEYS.ACCEPT_COOKIES_KEY) === 'true';
 
-export const setSessionCookie = (token: string) => {
-  Cookies.set(COOKIE_KEYS.SESSION_KEY, token);
+/**
+ * @param  {string|null} token token to set in the session key. A null value will remove it.
+ */
+export const setSessionCookie = (token: string | null, domain: string) => {
+  if (!token) {
+    return Cookies.remove(COOKIE_KEYS.SESSION_KEY);
+  }
+  return Cookies.set(COOKIE_KEYS.SESSION_KEY, token, { domain });
 };
 
-export const getSessionCookie = () => {
-  Cookies.get(COOKIE_KEYS.SESSION_KEY);
-};
+export const getSessionCookie = () => Cookies.get(COOKIE_KEYS.SESSION_KEY);
