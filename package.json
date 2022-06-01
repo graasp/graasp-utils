@@ -30,6 +30,7 @@
     "@commitlint/config-conventional": "16.0.0",
     "@types/eslint": "8.2.1",
     "@types/jest": "27.4.0",
+    "@types/js-cookie": "3.0.2",
     "@types/jsdom": "16.2.14",
     "@typescript-eslint/eslint-plugin": "5.9.0",
     "@typescript-eslint/parser": "5.9.0",
@@ -43,5 +44,8 @@
     "ts-node": "10.4.0",
     "typescript": "4.3.5"
   },
-  "packageManager": "yarn@3.2.0-rc.11"
+  "packageManager": "yarn@3.2.0-rc.11",
+  "dependencies": {
+    "js-cookie": "3.0.1"
+  }
 }

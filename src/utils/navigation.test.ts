@@ -1,9 +1,4 @@
-import { REDIRECT_URL_LOCAL_STORAGE_KEY } from '../constants/constants';
-import {
-  redirect,
-  redirectToSavedUrl,
-  saveUrlForRedirection,
-} from './navigation';
+import { redirect, redirectToSavedUrl } from './navigation';
 
 const DEFAULT_URL = 'https://example.com';
 
@@ -23,16 +18,6 @@ describe('Navigation Util Tests', () => {
       const args = { name: 'somename', openInNewTab: true };
       redirect(DEFAULT_URL, args);
       expect(mockWindowOpen).toHaveBeenCalledWith(DEFAULT_URL, args.name);
-    });
-  });
-
-  describe('saveUrlForRedirection', () => {
-    it('save successfully given pathname', () => {
-      saveUrlForRedirection(DEFAULT_URL);
-      expect(localStorage.setItem).toBeCalledWith(
-        REDIRECT_URL_LOCAL_STORAGE_KEY,
-        DEFAULT_URL,
-      );
     });
   });
 
