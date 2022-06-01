@@ -11,3 +11,7 @@ export const hasAcceptedCookies = () =>
 export const setSessionCookie = (token: string) => {
   Cookies.set(COOKIE_KEYS.SESSION_KEY, token);
 };
+
+export const getSessionCookie = () => {
+  Cookies.get(COOKIE_KEYS.SESSION_KEY);
+};
