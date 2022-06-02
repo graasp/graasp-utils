@@ -1,4 +1,3 @@
-import qs from 'qs';
 import { getUrlForRedirection } from './cookie';
 
 interface RedirectOptions {
@@ -31,5 +30,4 @@ export const redirectToSavedUrl = (
   return false;
 };
 
-export const redirectToSignIn = ({ host, to }: { host: string; to?: string }) =>
-  `${host}/signin${qs.stringify({ to }, { addQueryPrefix: true })}`;
+export const buildSignInPath = ({ host }: { host: string }) => `${host}/signin`;

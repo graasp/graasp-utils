@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-interface Session {
+export interface Session {
   id: string;
   token: string;
 }
@@ -30,7 +30,7 @@ export const getCurrentSession = () => Cookies.get(COOKIE_KEYS.SESSION_KEY);
 export const getStoredSessions = (): Session[] =>
   JSON.parse(Cookies.get(COOKIE_KEYS.STORED_SESSIONS_KEY) ?? '[]');
 
-export const addStoredSession = (payload: Session, domain: string) => {
+export const storeSession = (payload: Session, domain: string) => {
   const sessions = getStoredSessions();
 
   // add session if doesn't exist
@@ -38,6 +38,19 @@ export const addStoredSession = (payload: Session, domain: string) => {
     Cookies.set(
       COOKIE_KEYS.STORED_SESSIONS_KEY,
       JSON.stringify(sessions.concat([payload])),
+      { domain, secure: true },
+    );
+  }
+};
+export const removeSession = (sId: string, domain: string) => {
+  const sessions = getStoredSessions();
+  const session = sessions.find(({ id }) => sId === id);
+  // remove session if exist
+  if (session) {
+    const index = sessions.indexOf(session);
+    Cookies.set(
+      COOKIE_KEYS.STORED_SESSIONS_KEY,
+      JSON.stringify(sessions.splice(index, 1)),
       { domain, secure: true },
     );
   }
