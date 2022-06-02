@@ -44,16 +44,12 @@ export const storeSession = (payload: Session, domain: string) => {
 };
 export const removeSession = (sId: string, domain: string) => {
   const sessions = getStoredSessions();
-  const session = sessions.find(({ id }) => sId === id);
-  // remove session if exist
-  if (session) {
-    const index = sessions.indexOf(session);
-    Cookies.set(
-      COOKIE_KEYS.STORED_SESSIONS_KEY,
-      JSON.stringify(sessions.splice(index, 1)),
-      { domain, secure: true },
-    );
-  }
+  // remove session
+  Cookies.set(
+    COOKIE_KEYS.STORED_SESSIONS_KEY,
+    JSON.stringify(sessions.filter(({ id }) => sId !== id)),
+    { domain, secure: true },
+  );
 };
 
 export const saveUrlForRedirection = (link: string, domain: string) => {
