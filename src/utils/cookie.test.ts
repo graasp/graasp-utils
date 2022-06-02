@@ -1,16 +1,17 @@
-import { LOCAL_STORAGE_KEYS, saveUrlForRedirection } from './localStorage';
+import { COOKIE_KEYS, saveUrlForRedirection } from './cookie';
 
 const DEFAULT_URL = 'https://example.com';
+const DOMAIN = 'domain';
 
-describe('Navigation Util Tests', () => {
+describe('Cookie Util Tests', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
   describe('saveUrlForRedirection', () => {
     it('save successfully given pathname', () => {
-      saveUrlForRedirection(DEFAULT_URL);
+      saveUrlForRedirection(DEFAULT_URL, DOMAIN);
       expect(localStorage.setItem).toBeCalledWith(
-        LOCAL_STORAGE_KEYS.REDIRECT_URL_KEY,
+        COOKIE_KEYS.REDIRECT_URL_KEY,
         DEFAULT_URL,
       );
     });
