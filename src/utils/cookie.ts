@@ -23,7 +23,7 @@ export const hasAcceptedCookies = () =>
  */
 export const setCurrentSession = (token: string | null, domain: string) => {
   if (!token) {
-    return Cookies.remove(COOKIE_KEYS.SESSION_KEY);
+    return Cookies.remove(COOKIE_KEYS.SESSION_KEY, { domain });
   }
   return Cookies.set(COOKIE_KEYS.SESSION_KEY, token, { domain, secure: true });
 };
