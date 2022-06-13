@@ -27,7 +27,8 @@ export const redirectToSavedUrl = (
   options?: RedirectOptions,
 ) => {
   const link = getUrlForRedirection();
-  if (link) {
+  // prevent / to avoid possible infinite loop
+  if (link && link !== '/') {
     return redirect(link, options);
   }
   if (defaultLink) {
