@@ -54,7 +54,7 @@ export const storeSession = (session: Session, domain: string) => {
 
   const storedSessionIdx = sessions.findIndex(({ id }) => id === session.id);
   // add session if doesn't exist
-  if (!storedSessionIdx) {
+  if (storedSessionIdx < 0) {
     sessions.push(session);
   }
   // replace corresponding session with new values (date, token)
