@@ -1,8 +1,10 @@
 import Cookies from 'js-cookie';
+import { SESSION_COOKIE_EXPIRATION_DURATION_MS } from '../constants/constants';
 
 export interface Session {
   id: string;
   token: string;
+  createdAt: number;
 }
 
 export const COOKIE_KEYS = {
@@ -50,14 +52,20 @@ export const getStoredSessions = (): Session[] => {
 export const storeSession = (session: Session, domain: string) => {
   const sessions = getStoredSessions();
 
+  const storedSessionIdx = sessions.findIndex(({ id }) => id === session.id);
   // add session if doesn't exist
-  if (!sessions.find(({ id }) => id === session.id)) {
-    Cookies.set(
-      COOKIE_KEYS.STORED_SESSIONS_KEY,
-      JSON.stringify(sessions.concat([session])),
-      { domain, secure: true },
-    );
+  if (!storedSessionIdx) {
+    sessions.push(session);
   }
+  // replace corresponding session with new values (date, token)
+  else {
+    sessions[storedSessionIdx] = session;
+  }
+
+  Cookies.set(COOKIE_KEYS.STORED_SESSIONS_KEY, JSON.stringify(sessions), {
+    domain,
+    secure: true,
+  });
 };
 /**
  * @param  {string} sId session id to remove
@@ -71,6 +79,21 @@ export const removeSession = (sId: string, domain: string) => {
     COOKIE_KEYS.STORED_SESSIONS_KEY,
     JSON.stringify(sessions.filter(({ id }) => sId !== id)),
     { domain, secure: true },
+  );
+};
+/**
+ * @param  {string} sId session id to remove
+ * @returns  {boolean} whether the session is expired, true if no session found
+ */
+export const isSessionExpired = (sId: string) => {
+  const sessions = getStoredSessions();
+
+  const session = sessions.find(({ id }) => id === sId);
+  if (!session) {
+    return true;
+  }
+  return Boolean(
+    session.createdAt + SESSION_COOKIE_EXPIRATION_DURATION_MS < Date.now(),
   );
 };
 /**
