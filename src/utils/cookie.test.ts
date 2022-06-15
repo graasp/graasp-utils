@@ -1,11 +1,12 @@
 import * as cookieUtils from './cookie';
 import Cookies from 'js-cookie';
+import { SESSION_COOKIE_EXPIRATION_DURATION_MS } from '../constants/constants';
 
 const MOCK_URL = 'https://example.com';
 const DOMAIN = 'domain';
 const MOCK_SESSIONS = [
-  { id: 'id1', token: 'token1' },
-  { id: 'id2', token: 'token2' },
+  { id: 'id1', token: 'token1', createdAt: Date.now() },
+  { id: 'id2', token: 'token2', createdAt: Date.now() },
 ];
 
 const {
@@ -15,6 +16,8 @@ const {
   setCurrentSession,
   getCurrentSession,
   getStoredSessions,
+  storeSession,
+  isSessionExpired,
   removeSession,
 } = cookieUtils;
 
@@ -55,7 +58,7 @@ describe('Cookie Util Tests', () => {
     it('remove token if given token is null', () => {
       const mock = jest.spyOn(Cookies, 'remove');
       setCurrentSession(null, DOMAIN);
-      expect(mock).toBeCalledWith(COOKIE_KEYS.SESSION_KEY);
+      expect(mock).toBeCalledWith(COOKIE_KEYS.SESSION_KEY, expect.anything());
     });
   });
   describe('getCurrentSession', () => {
@@ -82,6 +85,34 @@ describe('Cookie Util Tests', () => {
       Cookies.set(COOKIE_KEYS.STORED_SESSIONS_KEY, 'weifojkn');
       const res = getStoredSessions();
       expect(res).toEqual([]);
+    });
+  });
+  describe('storeSession', () => {
+    it('add new session to stored session', () => {
+      jest
+        .spyOn(cookieUtils, 'getStoredSessions')
+        .mockReturnValue([MOCK_SESSIONS[0]]);
+      const mock = jest.spyOn(Cookies, 'set');
+      storeSession(MOCK_SESSIONS[1], DOMAIN);
+      expect(mock).toHaveBeenCalledWith(
+        COOKIE_KEYS.STORED_SESSIONS_KEY,
+        JSON.stringify(MOCK_SESSIONS),
+        { domain: DOMAIN, secure: true },
+      );
+    });
+    it('update existing session in stored session', () => {
+      const updatedSession = { ...MOCK_SESSIONS[1], token: 'newToken' };
+      const result = [MOCK_SESSIONS[0], updatedSession];
+      jest
+        .spyOn(cookieUtils, 'getStoredSessions')
+        .mockReturnValue(MOCK_SESSIONS);
+      const mock = jest.spyOn(Cookies, 'set');
+      storeSession(updatedSession, DOMAIN);
+      expect(mock).toHaveBeenCalledWith(
+        COOKIE_KEYS.STORED_SESSIONS_KEY,
+        JSON.stringify(result),
+        { domain: DOMAIN, secure: true },
+      );
     });
   });
   describe('removeSession', () => {
@@ -120,6 +151,34 @@ describe('Cookie Util Tests', () => {
         JSON.stringify(MOCK_SESSIONS),
         { domain: DOMAIN, secure: true },
       );
+    });
+  });
+  describe('isSessionExpired', () => {
+    it('return true for expired session', () => {
+      const expiredSession = {
+        token: 'token',
+        id: 'id',
+        createdAt: Date.now() - SESSION_COOKIE_EXPIRATION_DURATION_MS - 10,
+      };
+      jest
+        .spyOn(cookieUtils, 'getStoredSessions')
+        .mockReturnValue([MOCK_SESSIONS[0], expiredSession]);
+      const result = isSessionExpired(expiredSession.id);
+      expect(result).toBeTruthy();
+    });
+    it('return false for valid session', () => {
+      jest
+        .spyOn(cookieUtils, 'getStoredSessions')
+        .mockReturnValue(MOCK_SESSIONS);
+      const result = isSessionExpired(MOCK_SESSIONS[0].id);
+      expect(result).toBeFalsy();
+    });
+    it('return true for not found session', () => {
+      jest
+        .spyOn(cookieUtils, 'getStoredSessions')
+        .mockReturnValue(MOCK_SESSIONS);
+      const result = isSessionExpired('random-id');
+      expect(result).toBeTruthy();
     });
   });
   describe('saveUrlForRedirection', () => {
