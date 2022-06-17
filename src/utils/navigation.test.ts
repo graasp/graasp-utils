@@ -1,8 +1,6 @@
 import { buildSignInPath, redirect, redirectToSavedUrl } from './navigation';
 import * as cookieUtils from './cookie';
-
-const MOCK_HOST = 'myhost';
-const MOCK_URL = 'https://example.com';
+import { MOCK_URL, MOCK_HOST } from '../../test/fixtures';
 
 describe('Navigation Util Tests', () => {
   beforeEach(() => {
@@ -15,6 +13,7 @@ describe('Navigation Util Tests', () => {
       redirect(MOCK_URL);
       expect(mockWindowOpen).toHaveBeenCalledWith(MOCK_URL);
     });
+
     it('redirect successfully in new tab with name', () => {
       const mockWindowOpen = jest.spyOn(window, 'open');
       const args = { name: 'somename', openInNewTab: true };
@@ -30,6 +29,7 @@ describe('Navigation Util Tests', () => {
       redirectToSavedUrl();
       expect(mockWindowOpen).toHaveBeenCalledWith(MOCK_URL);
     });
+
     it('redirect successfully to default link', () => {
       const mockWindowOpen = jest.spyOn(window.location, 'assign');
       jest
@@ -38,13 +38,15 @@ describe('Navigation Util Tests', () => {
       redirectToSavedUrl(MOCK_URL);
       expect(mockWindowOpen).toHaveBeenCalledWith(MOCK_URL);
     });
+
     it('redirect successfully to saved link in new tab', () => {
       const mockWindowOpen = jest.spyOn(window, 'open');
       const args = { name: 'somename', openInNewTab: true };
       jest.spyOn(cookieUtils, 'getUrlForRedirection').mockReturnValue(MOCK_URL);
-      redirectToSavedUrl('mock-url', args);
+      redirectToSavedUrl(MOCK_URL, args);
       expect(mockWindowOpen).toHaveBeenCalledWith(MOCK_URL, args.name);
     });
+
     it('redirect successfully to default link in new tab', () => {
       const mockWindowOpen = jest.spyOn(window, 'open');
       const args = { name: 'somename', openInNewTab: true };
@@ -56,7 +58,7 @@ describe('Navigation Util Tests', () => {
   describe('buildSignInPath', () => {
     it('build sign in path', () => {
       const res = buildSignInPath({ host: MOCK_HOST });
-      expect(res).toBeTruthy();
+      expect(res).toContain(MOCK_HOST);
     });
   });
 });

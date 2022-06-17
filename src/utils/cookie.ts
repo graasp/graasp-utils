@@ -7,8 +7,9 @@ export interface Session {
   createdAt: number;
 }
 
+// todo: use enum once frontend interfaces are in ts
 export const COOKIE_KEYS = {
-  ACCEPT_COOKIES_KEY: 'accept-all-cookies',
+  ACCEPT_COOKIES_KEY: 'acceptAllCookies',
   SESSION_KEY: 'session',
   STORED_SESSIONS_KEY: 'storedSessions',
   REDIRECT_URL_KEY: 'redirectUrl',
@@ -20,7 +21,7 @@ export const hasAcceptedCookies = () =>
   Cookies.get(COOKIE_KEYS.ACCEPT_COOKIES_KEY) === 'true';
 
 /**
- * @param {string|null} token token to set in the session key. A null value will remove it.
+ * @param {string|null} token value to set in the session key. A null value will remove it.
  * @param  {string} domain value for the cookie's domain
  */
 export const setCurrentSession = (token: string | null, domain: string) => {
@@ -39,14 +40,23 @@ export const getCurrentSession = () => Cookies.get(COOKIE_KEYS.SESSION_KEY);
  */
 export const getStoredSessions = (): Session[] => {
   try {
-    return JSON.parse(Cookies.get(COOKIE_KEYS.STORED_SESSIONS_KEY) ?? '[]');
+    const storedSessions = JSON.parse(
+      Cookies.get(COOKIE_KEYS.STORED_SESSIONS_KEY) ?? '[]',
+    );
+
+    // validate value is an array
+    if (!Array.isArray(storedSessions)) {
+      return [];
+    }
+
+    return storedSessions;
   } catch (e) {
     return [];
   }
 };
 
 /**
- * @param  {Session} session session to store
+ * @param  {Session} session value to store
  * @param  {string} domain value for the cookie's domain
  */
 export const storeSession = (session: Session, domain: string) => {

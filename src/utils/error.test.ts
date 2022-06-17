@@ -5,6 +5,7 @@ describe('Error Utils', () => {
     it('should return true', () => {
       expect(isError({ statusCode: 'statusCode' })).toBeTruthy();
     });
+
     it('should return false', () => {
       expect(isError(null)).toBeFalsy();
       expect(isError(undefined)).toBeFalsy();
