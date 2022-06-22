@@ -1,4 +1,4 @@
-import { isPseudonymizedMember, PSEUDONYMIZED_USER_MAIL } from './member';
+import { isPseudonymizedMember } from './member';
 
 describe('Member Util Tests', () => {
   beforeEach(() => {
@@ -11,11 +11,13 @@ describe('Member Util Tests', () => {
       expect(res1).toBeFalsy();
       const res2 = isPseudonymizedMember('mail@email.org');
       expect(res2).toBeFalsy();
+      const res3 = isPseudonymizedMember('mail@graasp.org');
+      expect(res3).toBeFalsy();
     });
 
     it('check successfully member is pseudonymized for true values', () => {
-      const res1 = isPseudonymizedMember(`mail@${PSEUDONYMIZED_USER_MAIL}`);
-      expect(res1).toBeTruthy();
+      const res3 = isPseudonymizedMember('3242-1234567890123@graasp.org');
+      expect(res3).toBeTruthy();
     });
   });
 });

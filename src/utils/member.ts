@@ -1,4 +1,5 @@
-export const PSEUDONYMIZED_USER_MAIL = '@graasp.org';
+export const PSEUDONYMIZED_USER_MAIL_REGEX =
+  /[a-zA-Z0-9]{4}\-[0-9]{13}\@graasp\.org/;
 
 export const isPseudonymizedMember = (email: string) =>
-  email.includes(PSEUDONYMIZED_USER_MAIL);
+  PSEUDONYMIZED_USER_MAIL_REGEX.test(email.toLowerCase());
