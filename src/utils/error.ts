@@ -8,5 +8,5 @@ export const isError = (obj: any) => {
   if (!obj || typeof obj !== 'object') {
     return false;
   }
-  return 'statusCode' in obj;
+  return 'statusCode' in obj || obj instanceof Error;
 };
