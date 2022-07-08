@@ -1,9 +1,9 @@
-export const enum ItemType {
+export enum ItemType {
   APP = 'app',
   DOCUMENT = 'document',
-  FILE = 'file',
   FOLDER = 'folder',
   LINK = 'embeddedLink',
+  LOCAL_FILE = 'file',
   S3_FILE = 's3File',
   SHORTCUT = 'shortcut',
 }
