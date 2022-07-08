@@ -1,7 +1,7 @@
 import { Actor } from '../../../interfaces/actor';
 import { UnknownExtra } from '../../../interfaces/extra';
 
-export declare enum MemberType {
+export enum MemberType {
   Individual = 'individual',
   Group = 'group',
 }
