@@ -48,7 +48,7 @@
   },
   "packageManager": "yarn@3.2.1",
   "dependencies": {
-    "fastify": "4.2.0",
+    "fastify": "^3.25.3",
     "js-cookie": "3.0.1",
     "qs": "6.10.3",
     "slonik": "28.1.1",
