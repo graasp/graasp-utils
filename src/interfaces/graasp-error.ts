@@ -10,15 +10,21 @@ export interface GraaspErrorDetails {
   message: string;
   statusCode: number;
 }
-export declare abstract class BaseGraaspError implements GraaspError {
-  name: string;
-  code: string;
+export abstract class BaseGraaspError implements GraaspError {
+  name!: string;
+  code!: string;
   statusCode?: number;
-  message: string;
+  message!: string;
   data?: unknown;
-  origin: ErrorOrigin;
+  origin!: ErrorOrigin;
+
   constructor(
     { code, statusCode, message }: GraaspErrorDetails,
     data?: unknown,
-  );
+  ) {
+    this.code = code;
+    this.statusCode = statusCode;
+    this.message = message;
+    this.data = data;
+  }
 }
