@@ -19,7 +19,7 @@ export interface Task<A extends Actor, T> {
   targetId?: string;
   data?: Partial<IndividualResultType<T>>;
   status: TaskStatus;
-  readonly result: T;
+  readonly result?: T;
   readonly message?: string;
   readonly partialSubtasks?: boolean;
   run(
@@ -43,16 +43,19 @@ export interface Task<A extends Actor, T> {
    */
   getResult?: () => unknown;
 }
+
 export interface TaskHookHandlerHelpers {
   log: FastifyLoggerInstance;
   handler?: DatabaseTransactionHandler;
 }
+
 export type PreHookHandlerType<T, K = unknown> = (
   data: Partial<IndividualResultType<T>>,
   actor: Actor,
   helpers: TaskHookHandlerHelpers,
   extraData?: K,
 ) => Promise<void> | void;
+
 export type PostHookHandlerType<T, K = unknown> = (
   data: T,
   actor: Actor,
