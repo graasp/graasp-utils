@@ -6,3 +6,9 @@ export declare type DatabaseTransactionHandler = DatabaseTransactionConnection;
 export interface Database {
   pool: DatabasePoolHandler;
 }
+
+declare module 'fastify' {
+  interface FastifyInstance {
+    db: Database;
+  }
+}

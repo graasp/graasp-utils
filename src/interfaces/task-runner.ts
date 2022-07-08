@@ -3,6 +3,12 @@ import { FastifyLoggerInstance } from 'fastify';
 import { Actor } from './actor';
 import { PostHookHandlerType, PreHookHandlerType, Task } from './task';
 
+declare module 'fastify' {
+  interface FastifyInstance {
+    taskRunner: TaskRunner<Actor>;
+  }
+}
+
 export interface TaskRunner<A extends Actor> {
   /**
    * Run given task (transactionally) and return the task's result (or throws error).
