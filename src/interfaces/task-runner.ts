@@ -3,12 +3,6 @@ import { FastifyLoggerInstance } from 'fastify';
 import { Actor } from './actor';
 import { PostHookHandlerType, PreHookHandlerType, Task } from './task';
 
-declare module 'fastify' {
-  interface FastifyInstance {
-    taskRunner: TaskRunner<Actor>;
-  }
-}
-
 export interface TaskRunner<A extends Actor> {
   /**
    * Run given task (transactionally) and return the task's result (or throws error).
@@ -27,7 +21,7 @@ export interface TaskRunner<A extends Actor> {
     log?: FastifyLoggerInstance,
   ): Promise<unknown[]>;
   /**
-   * Run given task sequence in a single transaction, sequencially,
+   * Run given task sequence in a single transaction, sequentially,
    * and return the last task's result.
    * @param tasks Task sequence to run.
    * @param log Logger instance to use. Defaults to `this.logger`.

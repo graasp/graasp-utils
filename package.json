@@ -17,7 +17,7 @@
     "hooks:uninstall": "husky uninstall",
     "hooks:install": "husky install",
     "build": "tsc",
-    "test": "jest array.test.ts",
+    "test": "jest",
     "test:watch": "yarn test --watchAll",
     "lint": "eslint {src,test}",
     "prettier:check": "prettier --check src/**/*.ts",

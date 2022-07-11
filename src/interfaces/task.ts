@@ -35,7 +35,7 @@ export interface Task<A extends Actor, T> {
   skip?: boolean;
   input?: unknown;
   /**
-   * To to fetch and overwrite any values in the task's input
+   * To fetch and overwrite any values in the task's input
    */
   getInput?: () => unknown;
   /**

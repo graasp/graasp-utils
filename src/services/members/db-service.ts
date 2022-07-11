@@ -16,7 +16,7 @@ export declare class MemberService {
    * @param properties List of Member properties to fetch - defaults to 'all'
    */
   getMatching(
-    member: Partial<Member>,
+    member: Omit<Partial<Member>, 'extra' | 'created_at' | 'updated_at'>,
     dbHandler: TrxHandler,
     properties?: (keyof Member)[],
   ): Promise<Member[]>;
