@@ -644,6 +644,7 @@ __metadata:
     "@types/jest": 27.4.0
     "@types/js-cookie": 3.0.2
     "@types/jsdom": 16.2.14
+    "@types/lodash.clonedeep": 4.5.7
     "@types/qs": 6.9.7
     "@types/uuid": 8.3.4
     "@typescript-eslint/eslint-plugin": 5.9.0
@@ -1136,6 +1137,22 @@ __metadata:
   version: 7.0.9
   resolution: "@types/json-schema@npm:7.0.9"
   checksum: 259d0e25f11a21ba5c708f7ea47196bd396e379fddb79c76f9f4f62c945879dc21657904914313ec2754e443c5018ea8372362f323f30e0792897fdb2098a705
+  languageName: node
+  linkType: hard
+
+"@types/lodash.clonedeep@npm:4.5.7":
+  version: 4.5.7
+  resolution: "@types/lodash.clonedeep@npm:4.5.7"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 20d6a20970b3b54b3c10cf17ace1cea49c4905d7f7cae2575a98108466e8d4c9bea3b3449d11ccaac4da1fc9bab225f477f4c2dbea8ba877cc47f629455efb69
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.182
+  resolution: "@types/lodash@npm:4.14.182"
+  checksum: 7dd137aa9dbabd632408bd37009d984655164fa1ecc3f2b6eb94afe35bf0a5852cbab6183148d883e9c73a958b7fec9a9bcf7c8e45d41195add6a18c34958209
   languageName: node
   linkType: hard
 
