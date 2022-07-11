@@ -186,15 +186,4 @@ export declare class ItemMembershipService {
     inserts: Partial<ItemMembership>[];
     deletes: Partial<ItemMembership>[];
   }>;
-  private getPermissionsAtItemSql;
-  /**
-   * Identify any new memberships that will be necessary to create
-   * after moving the item from its parent item to *no-parent*.
-   *
-   * Moving to *no-parent* is simpler so this method is used instead of `moveHousekeeping()`.
-   * @param item Item that will be moved
-   * @param member Member used as `creator` for any new memberships
-   * @param transactionHandler Database transaction handler
-   */
-  private detachedMoveHousekeeping;
 }

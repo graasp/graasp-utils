@@ -48,7 +48,7 @@
   },
   "packageManager": "yarn@3.2.1",
   "dependencies": {
-    "fastify": "^3.25.3",
+    "fastify": "^3.29.1",
     "fluent-json-schema": "3.1.0",
     "js-cookie": "3.0.1",
     "qs": "6.10.3",
