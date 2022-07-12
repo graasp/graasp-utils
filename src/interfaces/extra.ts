@@ -4,6 +4,7 @@ export declare type Anything =
   | boolean
   | null
   | undefined
+  | unknown
   | Anything[]
   | {
       [key: string]: Anything;

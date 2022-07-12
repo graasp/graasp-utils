@@ -4,15 +4,18 @@ import { Session } from '@fastify/secure-session';
 
 import { Actor, TaskRunner } from './interfaces';
 import {
+  AuthTokenSubject,
   Database,
   ItemMembershipService,
   ItemMembershipTaskManager,
   ItemService,
   ItemTaskManager,
+  LocalFileConfiguration,
   Member,
   MemberService,
   MemberTaskManager,
   PublicItemService,
+  S3FileConfiguration,
 } from './services';
 import { PublicItemTaskManager } from './services/public/interfaces/task-manager';
 
@@ -26,6 +29,11 @@ declare module 'fastify' {
      */
     member: Member;
     session: Session;
+
+    /**
+     * App token subject
+     */
+    authTokenSubject?: AuthTokenSubject;
   }
 
   interface FastifyInstance {
@@ -114,13 +122,9 @@ declare module 'fastify' {
     /** File configurations
      * to be replaced with services
      */
-    s3FileItemPluginOptions?: {
-      s3Region: string;
-      s3Bucket: string;
-      s3AccessKeyId: string;
-      s3SecretAccessKey: string;
-      s3Instance: string;
+    file: {
+      s3Config?: S3FileConfiguration;
+      localConfig?: LocalFileConfiguration;
     };
-    fileItemPluginOptions?: { storageRootPath: string };
   }
 }

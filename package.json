@@ -51,6 +51,7 @@
   "packageManager": "yarn@3.2.1",
   "dependencies": {
     "@fastify/secure-session": "5.2.0",
+    "aws-sdk": "2.1111.0",
     "fastify": "^3.29.1",
     "fluent-json-schema": "3.1.0",
     "js-cookie": "3.0.1",
