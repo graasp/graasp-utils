@@ -1,6 +1,6 @@
 import { DatabaseTransactionConnection as TrxHandler } from 'slonik';
-import { PermissionLevel } from '../../constants';
 
+import { PermissionLevel } from '../../constants';
 import { Item } from '../items/interfaces/item';
 import { Member } from '../members/interfaces/member';
 import { ItemMembership } from './interfaces/item-membership';

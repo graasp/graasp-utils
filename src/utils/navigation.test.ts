@@ -1,6 +1,6 @@
-import { buildSignInPath, redirect, redirectToSavedUrl } from './navigation';
+import { MOCK_HOST, MOCK_URL } from '../../test/fixtures';
 import * as cookieUtils from './cookie';
-import { MOCK_URL, MOCK_HOST } from '../../test/fixtures';
+import { buildSignInPath, redirect, redirectToSavedUrl } from './navigation';
 
 describe('Navigation Util Tests', () => {
   beforeEach(() => {

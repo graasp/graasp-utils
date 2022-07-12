@@ -1,9 +1,10 @@
 import { v4 } from 'uuid';
+
 import {
   buildPathFromIds,
+  getChildFromPath,
   getIdsFromPath,
   getParentFromPath,
-  getChildFromPath,
 } from './item';
 
 describe('Item Utils', () => {

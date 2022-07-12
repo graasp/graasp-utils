@@ -1,7 +1,8 @@
-import * as cookieUtils from './cookie';
 import Cookies from 'js-cookie';
-import { SESSION_COOKIE_EXPIRATION_DURATION_MS } from '../constants/constants';
+
 import { MOCK_DOMAIN, MOCK_SESSIONS, MOCK_URL } from '../../test/fixtures';
+import { SESSION_COOKIE_EXPIRATION_DURATION_MS } from '../constants/constants';
+import * as cookieUtils from './cookie';
 
 const {
   COOKIE_KEYS,

@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+
 import { SESSION_COOKIE_EXPIRATION_DURATION_MS } from '../constants/constants';
 
 export interface Session {
