@@ -110,5 +110,17 @@ declare module 'fastify' {
         dbService: PublicItemService;
       };
     };
+
+    /** File configurations
+     * to be replaced with services
+     */
+    s3FileItemPluginOptions?: {
+      s3Region: string;
+      s3Bucket: string;
+      s3AccessKeyId: string;
+      s3SecretAccessKey: string;
+      s3Instance: string;
+    };
+    fileItemPluginOptions?: { storageRootPath: string };
   }
 }
