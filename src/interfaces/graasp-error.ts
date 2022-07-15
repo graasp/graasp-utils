@@ -1,15 +1,18 @@
 import { FastifyError } from 'fastify';
 
 declare type ErrorOrigin = 'core' | 'plugin' | 'unknown' | string;
+
 export interface GraaspError extends FastifyError {
   data?: unknown;
   origin: ErrorOrigin;
 }
+
 export interface GraaspErrorDetails {
   code: string;
   message: string;
   statusCode: number;
 }
+
 export abstract class BaseGraaspError implements GraaspError {
   name!: string;
   code!: string;
@@ -28,3 +31,9 @@ export abstract class BaseGraaspError implements GraaspError {
     this.data = data;
   }
 }
+
+export const ErrorFactory = (origin: ErrorOrigin) => {
+  return class MyError extends BaseGraaspError {
+    origin = origin;
+  };
+};
