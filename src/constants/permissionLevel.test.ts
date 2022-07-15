@@ -1,4 +1,4 @@
-import { PermissionLevel, PermissionLevelCompare } from './permissionLevels';
+import { PermissionLevel, PermissionLevelCompare } from './permissionLevel';
 
 describe('PermissionLevelCompare', () => {
   it('gt', () => {

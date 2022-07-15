@@ -1,10 +1,10 @@
 import { UnknownExtra } from '../../../interfaces';
 
-export interface FileProperties {
+export type FileProperties = {
   name: string;
   path: string;
   mimetype: string;
-}
+};
 
 export interface LocalFileItemExtra extends UnknownExtra {
   file: FileProperties;
