@@ -14,6 +14,7 @@ export interface ItemTaskManager<A extends Actor = Actor> {
   getGetChildrenTaskName(): string;
   getGetOwnTaskName(): string;
   getGetSharedWithTaskName(): string;
+  getGetDescendantsTaskName(): string;
 
   createCreateTaskSequence(
     actor: A,
@@ -61,6 +62,13 @@ export interface ItemTaskManager<A extends Actor = Actor> {
     ordered?: boolean,
   ): Task<A, unknown>[];
   createGetOwnTask(actor: Actor): Task<A, Item[]>;
-  createGetSharedWithTask(actor: Actor): Task<A, Item[]>;
+  createGetSharedWithTask(
+    actor: Actor,
+    input: { permissions?: string[] },
+  ): Task<A, Item[]>;
+  createGetDescendantsTask(
+    member: Actor,
+    input?: { item: Item },
+  ): Task<A, Item[]>;
   createGetManyTask(member: Actor, itemIds?: string[]): Task<Actor, unknown>;
 }
