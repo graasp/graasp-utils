@@ -144,11 +144,13 @@ export declare class ItemService {
    * Get items "shared with" `member` - "highest" items in the membership tree where `member`
    * is not admin or `member` is admin but not the item creator
    * @param memberId Member's id
+   * @param filters.permissions filter items by permission levels
    * @param transactionHandler Database transaction handler
    * TODO: does this make sense here? Should this be part of different (micro)service??
    */
   getSharedWith(
     memberId: string,
+    filters: { permissions?: string[] },
     transactionHandler: TrxHandler,
   ): Promise<Item[]>;
   /**
