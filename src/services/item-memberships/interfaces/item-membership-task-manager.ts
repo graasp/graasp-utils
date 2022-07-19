@@ -10,6 +10,7 @@ export interface ItemMembershipTaskManager<A extends Actor = Actor> {
   getUpdateTaskName(): string;
   getDeleteTaskName(): string;
   getGetOfItemTaskName(): string;
+
   createCreateTask(
     actor: A,
     data: Partial<ItemMembership>,
@@ -45,4 +46,12 @@ export interface ItemMembershipTaskManager<A extends Actor = Actor> {
     actor: A,
     input?: { item?: Item; validatePermission?: PermissionLevel },
   ): Task<A, ItemMembership>;
+  createGetAdminMembershipTaskSequence(
+    actor: A,
+    itemId: string,
+  ): Task<A, unknown>[];
+  createCreateSubTaskSequence(
+    actor: A,
+    input: { data?: Partial<ItemMembership>; item?: Item },
+  ): Task<A, unknown>[];
 }
