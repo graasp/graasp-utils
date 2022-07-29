@@ -1,10 +1,13 @@
 import { v4 } from 'uuid';
 
+import { Item } from '../services';
 import {
   buildPathFromIds,
   getChildFromPath,
   getIdsFromPath,
   getParentFromPath,
+  isChildOf,
+  isRootItem,
 } from './item';
 
 describe('Item Utils', () => {
@@ -63,6 +66,34 @@ describe('Item Utils', () => {
       const child = v4();
       expect(getChildFromPath(buildPathFromIds(parent, child))).toBe(child);
       expect(getChildFromPath(buildPathFromIds(child))).toBe(child);
+    });
+  });
+
+  describe('isChildOf', () => {
+    test('return false', () => {
+      const parent = buildPathFromIds(v4());
+      const child = buildPathFromIds(v4());
+      expect(isChildOf(child, parent)).toBeFalsy();
+    });
+    test('return true', () => {
+      const parentId = v4();
+      const parent = buildPathFromIds(parentId);
+      const child = buildPathFromIds(parentId, v4());
+      expect(isChildOf(child, parent)).toBeTruthy();
+    });
+  });
+
+  describe('isRootItem', () => {
+    test('return true', () => {
+      const id = v4();
+      const parentId = v4();
+      const item = { id, path: buildPathFromIds(parentId, id) };
+      expect(isRootItem(item as Item)).toBeTruthy();
+    });
+    test('return false', () => {
+      const id = v4();
+      const item = { id, path: buildPathFromIds(id) };
+      expect(isRootItem(item as Item)).toBeFalsy();
     });
   });
 });
